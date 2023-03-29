@@ -35,14 +35,23 @@ app.post("/" , async (req , res)=>{
     imgUrl = [];
 
     var prompt = req.body.search;
-        const result = await openai.createImage({
-            prompt,
-            n: 5,
-            size: "512x512"
-        });
         
-        for(var i=0 ; i<5 ; i++){
-            imgUrl.push(result.data.data[i].url);
+    // try block if search is successful
+    try{
+            const result = await openai.createImage({
+                prompt,
+                n: 5,
+                size: "512x512"
+            });
+            
+            for(var i=0 ; i<5 ; i++){
+                imgUrl.push(result.data.data[i].url);
+            }
+        }
+
+    // catch block if search is invalid generate error
+    catch (error){
+            prompt = "error(invalid search)";
         }
 
     res.render("home" , {
