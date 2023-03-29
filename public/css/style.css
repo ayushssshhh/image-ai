@@ -317,6 +317,17 @@ body{
     border-top-right-radius: 10px;
     border: none;
     color: white;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.btn:hover{
+    box-shadow: 10px 15px 15px #3a105f;
+    font-size: 12px;
+}
+
+.btn:active{
+    font-size: 11px;
 }
 
 .search h1{
