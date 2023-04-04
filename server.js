@@ -2,6 +2,7 @@
 const express = require("express"); 
 const bodyParser = require("body-parser");
 const { OpenAIApi, Configuration } = require("openai");
+require("dotenv").config();
 
 const app = express();
 
@@ -15,10 +16,9 @@ app.use(express.static('public'));
 const port = 3000;
 const exampleUrl = ['./images/exapmle/1.png' , './images/exapmle/2.png' , './images/exapmle/3.png' , './images/exapmle/4.png' , './images/exapmle/5.png' , './images/exapmle/6.png'];
 let imgUrl = [];  
-OPENAI_API_KEY='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'
 
 const configuration = new Configuration({
-    apiKey: OPENAI_API_KEY,
+    apiKey: process.env.OPENAI_API_KEY,
   });
   const openai = new OpenAIApi(configuration);
 
@@ -52,6 +52,7 @@ app.post("/" , async (req , res)=>{
     // catch block if search is invalid generate error
     catch (error){
             prompt = "error(invalid search)";
+            console.log(error);
         }
 
     res.render("home" , {
